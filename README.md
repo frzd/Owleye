@@ -8,10 +8,9 @@ Owleye is a .net based watchdog system in order to availability check of endpoin
   - Page Load Check
  
  Owleye is based on .net core 3/SQL/Entity Framework
+
  
- Other technologies :
- 
- | * | README |
+ |  Other technologies | README |
 | ------ | ------ |
 | Quartz for backgroud jobs | https://github.com/quartz-scheduler/quartz |
 | MediatR for messaging | https://github.com/jbogard/MediatR |
