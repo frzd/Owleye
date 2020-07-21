@@ -11,12 +11,12 @@ using Owleye.Service.Notifications.Messages;
 
 namespace Owleye.Service.Notifications.Services
 {
-    public class DoPingServiceHandler : INotificationHandler<DoPingMessage>
+    public class DoPingHandler : INotificationHandler<DoPingMessage>
     {
         private readonly IMediator _mediator;
         private readonly IRedisCache _cache;
 
-        public DoPingServiceHandler(
+        public DoPingHandler(
             IMediator mediator,
             IRedisCache cache)
         {

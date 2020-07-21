@@ -6,11 +6,11 @@ using Owleye.Service.Notifications.Messages;
 
 namespace Owleye.Service.Notifications.Services
 {
-    public class NotifyViaEmailService : INotificationHandler<NotifyViaEmailMessage>
+    public class NotifyViaEmailHandler : INotificationHandler<NotifyViaEmailMessage>
     {
         private readonly ILiteXEmailSender _emailSender;
 
-        public NotifyViaEmailService(ILiteXEmailSender emailSender)
+        public NotifyViaEmailHandler(ILiteXEmailSender emailSender)
         {
             _emailSender = emailSender;
         }

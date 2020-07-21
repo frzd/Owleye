@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Extension.Methods;
 using MediatR;
 using Owleye.Common.Cache;
 using Owleye.Model.Model;
@@ -9,12 +10,12 @@ using Owleye.Service.Notifications.Messages;
 
 namespace Owleye.Service.Notifications.Services
 {
-    public class PingResultServiceHandler : INotificationHandler<PingNotificationMessage>
+    public class PingResultHandler : INotificationHandler<PingNotificationMessage>
     {
         private readonly IMediator _mediator;
         private readonly IRedisCache _cache;
 
-        public PingResultServiceHandler(IMediator mediator, IRedisCache cache)
+        public PingResultHandler(IMediator mediator, IRedisCache cache)
         {
             _mediator = mediator;
             _cache = cache;
@@ -36,6 +37,15 @@ namespace Owleye.Service.Notifications.Services
 
             if (history.LastStatus != notification.PingSuccess)
             {
+                await Notify(notification, cancellationToken);
+            }
+
+        }
+
+        private async Task Notify(PingNotificationMessage notification, CancellationToken cancellationToken)
+        {
+            if (notification.EmailNotify.IsNotNullOrEmpty())
+            {
                 await _mediator.Publish(new NotifyViaEmailMessage
                 {
                     IpAddress = notification.IpAddress,
@@ -43,9 +53,12 @@ namespace Owleye.Service.Notifications.Services
                     EmailAddress = notification.EmailNotify,
                     IsServiceAlive = notification.PingSuccess
                 }, cancellationToken);
-
             }
 
+            if (notification.MobileNotify.IsNotNullOrEmpty())
+            {
+                //todo notify via sms.
+            }
         }
     }
 }
