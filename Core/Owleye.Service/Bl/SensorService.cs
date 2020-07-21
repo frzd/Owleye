@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Owleye.Model.Model;
@@ -7,7 +8,7 @@ using Owleye.Model.Repository;
 
 namespace Owleye.Service.Bl
 {
-    public class SensorService:ISensorService
+    public class SensorService : ISensorService
     {
         private readonly IGenericRepository<Sensor> _sensorRepository;
 
@@ -15,6 +16,12 @@ namespace Owleye.Service.Bl
         {
             _sensorRepository = sensorRepository;
         }
+        public async Task<IEnumerable<Sensor>> GetSensors(SensorInterval interval, SensorType sensorType)
+        {
+            var endPointList = (await GetSensors(interval)).Where(q => q.SensorType == sensorType);
+            return endPointList;
+        }
+
         public async Task<IEnumerable<Sensor>> GetSensors(SensorInterval interval)
         {
             var includeProperties = new Expression<Func<Sensor, dynamic>>[2];
