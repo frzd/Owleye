@@ -16,21 +16,21 @@ namespace Owleye.Service.Notifications.Services
             {
                 case false:
                     {
-                        stringBuilder.Append("Owleye Service ALERT!" + Environment.NewLine);
+                        stringBuilder.Append("<b> Owleye Service ALERT</b>" + "<br/>");
 
                         switch (message.SensorType)
                         {
                             case SensorType.Ping:
                                 {
                                     stringBuilder.Append(
-                                        $"{SensorType.Ping.AsString(EnumFormat.Description)} for IP {message.IpAddress} failed." + Environment.NewLine);
+                                        $"{SensorType.Ping.AsString(EnumFormat.Description)} for IP {message.IpAddress} failed." +  "<br/>");
                                     break;
                                 }
 
                             case SensorType.PageLoad:
                                 {
                                     stringBuilder.Append(
-                                        $"{SensorType.PageLoad.AsString(EnumFormat.Description)} for Url {message.ServiceUrl} failed." + Environment.NewLine);
+                                        $"{SensorType.PageLoad.AsString(EnumFormat.Description)} for url {message.ServiceUrl} failed." +  "<br/>");
                                     break;
                                 }
                         }
@@ -40,21 +40,21 @@ namespace Owleye.Service.Notifications.Services
 
                 case true:
                     {
-                        stringBuilder.Append("Owleye Service Notification" + Environment.NewLine);
+                        stringBuilder.Append("<b> Owleye Service Notification </b>" +  "<br/>");
 
                         switch (message.SensorType)
                         {
                             case SensorType.Ping:
                                 {
                                     stringBuilder.Append(
-                                        $"{SensorType.Ping.AsString(EnumFormat.Description)} for IP {message.IpAddress} available." + Environment.NewLine);
+                                        $"{SensorType.Ping.AsString(EnumFormat.Description)} for IP {message.IpAddress} available." +  "<br/>");
                                     break;
                                 }
 
                             case SensorType.PageLoad:
                                 {
                                     stringBuilder.Append(
-                                        $"{SensorType.PageLoad.AsString(EnumFormat.Description)} for Url {message.ServiceUrl} available." + Environment.NewLine);
+                                        $"{SensorType.PageLoad.AsString(EnumFormat.Description)} for url {message.ServiceUrl} available." +  "<br/>");
                                     break;
                                 }
                         }
@@ -63,7 +63,7 @@ namespace Owleye.Service.Notifications.Services
                     }
             }
 
-            stringBuilder.Append("<br/> Owleye monitoring system");
+            stringBuilder.Append("<hr/> <b> Owleye monitoring system. </b>");
             return stringBuilder.ToString();
         }
     }

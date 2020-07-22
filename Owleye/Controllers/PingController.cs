@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Owleye.Controllers
 {
@@ -6,13 +7,17 @@ namespace Owleye.Controllers
     [Route("[controller]")]
     public class PingController : ControllerBase
     {
-        public PingController()
+        private readonly ILogger _log;
+
+        public PingController(ILogger<PingController> logger)
         {
+            _log = logger;
         }
 
         [HttpGet]
         public IActionResult Get(int id)
         {
+            _log.LogInformation("d");
             return Ok();
         }
     }

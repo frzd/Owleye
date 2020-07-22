@@ -3,9 +3,9 @@ using System.Net;
 
 namespace Owleye.Common.Util
 {
-    public class WebSiteUtil
+    public static class WebSiteUtil
     {
-        public bool IsUrlAlive(string url)
+        public static bool IsUrlAlive(string url)
         {
             try
             {

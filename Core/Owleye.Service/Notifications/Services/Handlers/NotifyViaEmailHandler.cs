@@ -19,7 +19,7 @@ namespace Owleye.Service.Notifications.Services
             var message = NotifyMessagePreparationService.Prepare(notification);
 
             await _emailSender.SendEmailAsync($"Owleye notification", message,
-                 "f0rz0d@outlook.com", "test",
+                 "f0rz0d@outlook.com", "owleye",
                  "f0rz0d@outlook.com", "Farzad dh", cancellationToken: cancellationToken);
         }
     }

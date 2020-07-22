@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Owleye.Common.Cache;
 using Owleye.Model.Model;
 using Owleye.Model.Repository;
@@ -42,9 +43,10 @@ namespace Owleye
             services.AddTransient<ISensorService, SensorService>();
         }
         
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider sp)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider sp, ILoggerFactory loggerFactory)
         {
-            
+            //loggerFactory.AddFile("Logs/Owleye-{Date}.log");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

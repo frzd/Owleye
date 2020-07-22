@@ -90,6 +90,21 @@ namespace Owleye.Service
 
                             break;
                         }
+
+                    case SensorType.PageLoad:
+                        {
+                            await mediator.Publish(
+                                new DoPageLoadMessage
+                                {
+                                    PageUrl = sensor.EndPoint.Url,
+                                    MobileNotify = sensor.EndPoint.Notification.PhoneNumber,
+                                    EndPointId = sensor.EndPointId,
+                                    EmailNotify = sensor.EndPoint.Notification.EmailAddress,
+                                }
+                            );
+
+                            break;
+                        }
                 }
 
             }

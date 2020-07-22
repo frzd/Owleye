@@ -1,0 +1,46 @@
+2020-07-21T18:08:21.6216785+04:30  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-07-21T18:08:21.6385344+04:30  [INF] Hosting environment: "Development" (c3307c92)
+2020-07-21T18:08:21.6406320+04:30  [INF] Content root path: "C:\Users\FRZD\Documents\GIT\Owleye\Owleye" (b5d60022)
+2020-07-21T18:08:21.6599450+04:30 800001bb-0007-fa00-b63f-84710c7967bb [INF] Request starting HTTP/1.1 GET http://localhost:60615/weatherforecast   (ca22a1cb)
+2020-07-21T18:08:21.7196003+04:30 800001bb-0007-fa00-b63f-84710c7967bb [INF] Request finished in 68.8314ms 404  (791a596a)
+2020-07-21T18:08:24.6525625+04:30  [INF] Entity Framework Core "3.1.6" initialized '"OwleyeDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-07-21T18:08:25.1995155+04:30  [INF] Executed DbCommand ("69"ms) [Parameters=["@__interval_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [s].[Id], [s].[Created], [s].[CreatedById], [s].[EndPointId], [s].[Modified], [s].[ModifiedById], [s].[Name], [s].[SensorInterval], [s].[SensorType], [e].[Id], [e].[Created], [e].[CreatedById], [e].[IpAddress], [e].[Modified], [e].[ModifiedById], [e].[Name], [e].[Url], [e].[WebPageMetaKeyword], [n].[Id], [n].[Created], [n].[CreatedById], [n].[EmailAddress], [n].[EndPointId], [n].[Modified], [n].[ModifiedById], [n].[PhoneNumber]
+FROM [Sensors] AS [s]
+INNER JOIN [EndPoints] AS [e] ON [s].[EndPointId] = [e].[Id]
+LEFT JOIN [Notification] AS [n] ON [e].[Id] = [n].[EndPointId]
+WHERE [s].[SensorInterval] = @__interval_0" (0723d8ff)
+2020-07-21T18:08:28.8651025+04:30 800001bc-0007-fa00-b63f-84710c7967bb [INF] Request starting HTTP/1.1 GET http://localhost:60615/ping   (ca22a1cb)
+2020-07-21T18:08:28.8774203+04:30 800001bc-0007-fa00-b63f-84710c7967bb [INF] Executing endpoint '"Owleye.Controllers.PingController.Get (Owleye)"' (500cc934)
+2020-07-21T18:08:28.9108949+04:30 800001bc-0007-fa00-b63f-84710c7967bb [INF] Route matched with "{action = \"Get\", controller = \"Ping\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.IActionResult Get(Int32)" on controller "Owleye.Controllers.PingController" ("Owleye"). (122b2fdf)
+2020-07-21T18:08:28.9804643+04:30 800001bc-0007-fa00-b63f-84710c7967bb [INF] Executing action method "Owleye.Controllers.PingController.Get (Owleye)" - Validation state: Valid (dad538d7)
+2020-07-21T18:08:28.9832936+04:30 800001bc-0007-fa00-b63f-84710c7967bb [INF] d (2350c685)
+2020-07-21T18:08:28.9919987+04:30 800001bc-0007-fa00-b63f-84710c7967bb [INF] Executed action method "Owleye.Controllers.PingController.Get (Owleye)", returned result "Microsoft.AspNetCore.Mvc.OkResult" in 2.9212000000000002ms. (50a9e262)
+2020-07-21T18:08:29.0007928+04:30 800001bc-0007-fa00-b63f-84710c7967bb [INF] Executing HttpStatusCodeResult, setting HTTP status code 200 (e28ccfae)
+2020-07-21T18:08:29.0089913+04:30 800001bc-0007-fa00-b63f-84710c7967bb [INF] Executed action "Owleye.Controllers.PingController.Get (Owleye)" in 89.78920000000001ms (afa2e885)
+2020-07-21T18:08:29.0117628+04:30 800001bc-0007-fa00-b63f-84710c7967bb [INF] Executed endpoint '"Owleye.Controllers.PingController.Get (Owleye)"' (99874f2b)
+2020-07-21T18:08:29.0177447+04:30 800001bc-0007-fa00-b63f-84710c7967bb [INF] Request finished in 153.4598ms 200  (791a596a)
+2020-07-21T18:08:51.5888127+04:30  [INF] Executed DbCommand ("4"ms) [Parameters=["@__interval_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [s].[Id], [s].[Created], [s].[CreatedById], [s].[EndPointId], [s].[Modified], [s].[ModifiedById], [s].[Name], [s].[SensorInterval], [s].[SensorType], [e].[Id], [e].[Created], [e].[CreatedById], [e].[IpAddress], [e].[Modified], [e].[ModifiedById], [e].[Name], [e].[Url], [e].[WebPageMetaKeyword], [n].[Id], [n].[Created], [n].[CreatedById], [n].[EmailAddress], [n].[EndPointId], [n].[Modified], [n].[ModifiedById], [n].[PhoneNumber]
+FROM [Sensors] AS [s]
+INNER JOIN [EndPoints] AS [e] ON [s].[EndPointId] = [e].[Id]
+LEFT JOIN [Notification] AS [n] ON [e].[Id] = [n].[EndPointId]
+WHERE [s].[SensorInterval] = @__interval_0" (0723d8ff)
+2020-07-21T18:10:01.4976074+04:30  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-07-21T18:10:01.5139334+04:30  [INF] Hosting environment: "Development" (c3307c92)
+2020-07-21T18:10:01.5158613+04:30  [INF] Content root path: "C:\Users\FRZD\Documents\GIT\Owleye\Owleye" (b5d60022)
+2020-07-21T18:10:01.5436200+04:30 80000089-0000-f600-b63f-84710c7967bb [INF] Request starting HTTP/1.1 GET http://localhost:60615/weatherforecast   (ca22a1cb)
+2020-07-21T18:10:01.5990869+04:30 80000089-0000-f600-b63f-84710c7967bb [INF] Request finished in 73.2328ms 404  (791a596a)
+2020-07-21T18:10:09.7711775+04:30  [INF] Entity Framework Core "3.1.6" initialized '"OwleyeDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-07-21T18:10:10.3179647+04:30  [INF] Executed DbCommand ("80"ms) [Parameters=["@__interval_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [s].[Id], [s].[Created], [s].[CreatedById], [s].[EndPointId], [s].[Modified], [s].[ModifiedById], [s].[Name], [s].[SensorInterval], [s].[SensorType], [e].[Id], [e].[Created], [e].[CreatedById], [e].[IpAddress], [e].[Modified], [e].[ModifiedById], [e].[Name], [e].[Url], [e].[WebPageMetaKeyword], [n].[Id], [n].[Created], [n].[CreatedById], [n].[EmailAddress], [n].[EndPointId], [n].[Modified], [n].[ModifiedById], [n].[PhoneNumber]
+FROM [Sensors] AS [s]
+INNER JOIN [EndPoints] AS [e] ON [s].[EndPointId] = [e].[Id]
+LEFT JOIN [Notification] AS [n] ON [e].[Id] = [n].[EndPointId]
+WHERE [s].[SensorInterval] = @__interval_0" (0723d8ff)
+2020-07-21T18:10:31.4599619+04:30  [INF] Executed DbCommand ("6"ms) [Parameters=["@__interval_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [s].[Id], [s].[Created], [s].[CreatedById], [s].[EndPointId], [s].[Modified], [s].[ModifiedById], [s].[Name], [s].[SensorInterval], [s].[SensorType], [e].[Id], [e].[Created], [e].[CreatedById], [e].[IpAddress], [e].[Modified], [e].[ModifiedById], [e].[Name], [e].[Url], [e].[WebPageMetaKeyword], [n].[Id], [n].[Created], [n].[CreatedById], [n].[EmailAddress], [n].[EndPointId], [n].[Modified], [n].[ModifiedById], [n].[PhoneNumber]
+FROM [Sensors] AS [s]
+INNER JOIN [EndPoints] AS [e] ON [s].[EndPointId] = [e].[Id]
+LEFT JOIN [Notification] AS [n] ON [e].[Id] = [n].[EndPointId]
+WHERE [s].[SensorInterval] = @__interval_0" (0723d8ff)
