@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using LiteX.Email.Core;
 using MediatR;
@@ -18,9 +19,15 @@ namespace Owleye.Service.Notifications.Services
         {
             var message = NotifyMessagePreparationService.Prepare(notification);
 
-            await _emailSender.SendEmailAsync($"Owleye notification", message,
-                 "f0rz0d@outlook.com", "owleye",
-                 "f0rz0d@outlook.com", "Farzad dh", cancellationToken: cancellationToken);
+            var mainEmail = notification.EmailAddress.First();
+            var ccs = notification.EmailAddress.Where(q => q != mainEmail).ToList();
+
+            await _emailSender.SendEmailAsync($"OwlEye notification", message,
+            "server@pouyabadkoobeh.com", "Badkoobeh Web Server Monitoring",
+            mainEmail, "owl eye user", null, null, ccs, cancellationToken: cancellationToken);
+
+
+
         }
     }
 }
