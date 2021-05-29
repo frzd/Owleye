@@ -19,14 +19,9 @@ namespace Owleye.Service.Notifications.Services
         {
             var message = NotifyMessagePreparationService.Prepare(notification);
 
-            var mainEmail = notification.EmailAddress.First();
-            var ccs = notification.EmailAddress.Where(q => q != mainEmail).ToList();
-
             await _emailSender.SendEmailAsync($"OwlEye notification", message,
             "server@pouyabadkoobeh.com", "Badkoobeh Web Server Monitoring",
-            mainEmail, "owl eye user", null, null, ccs, cancellationToken: cancellationToken);
-
-
+            notification.EmailAddress, "owl eye user", null, null, cancellationToken: cancellationToken);
 
         }
     }
