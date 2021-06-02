@@ -6,7 +6,7 @@ using Owleye.Service.Bl;
 using Owleye.Service.Dto.Messages;
 using Quartz;
 using Quartz.Impl;
-
+using System.Linq;
 namespace Owleye.Service
 {
     public class QuartzBootStrap
@@ -74,6 +74,9 @@ namespace Owleye.Service
         {
             foreach (var sensor in endPointList)
             {
+                var mobileNumbers = sensor.EndPoint.Notification.Select(q => q.PhoneNumber).ToList();
+                var emailAdresses = sensor.EndPoint.Notification.Select(q => q.EmailAddress).ToList();
+
                 switch (sensor.SensorType)
                 {
                     case SensorType.Ping:
@@ -82,9 +85,9 @@ namespace Owleye.Service
                                 new DoPingMessage
                                 {
                                     IpAddress = sensor.EndPoint.IpAddress,
-                                    MobileNotify = sensor.EndPoint.Notification.PhoneNumber,
+                                    MobileNotify = mobileNumbers,
                                     EndPointId = sensor.EndPointId,
-                                    EmailNotify = sensor.EndPoint.Notification.EmailAddress,
+                                    EmailNotify = emailAdresses,
                                 }
                             );
 
@@ -97,9 +100,9 @@ namespace Owleye.Service
                                 new DoPageLoadMessage
                                 {
                                     PageUrl = sensor.EndPoint.Url,
-                                    MobileNotify = sensor.EndPoint.Notification.PhoneNumber,
+                                    MobileNotify = mobileNumbers,
                                     EndPointId = sensor.EndPointId,
-                                    EmailNotify = sensor.EndPoint.Notification.EmailAddress,
+                                    EmailNotify = emailAdresses,
                                 }
                             );
 

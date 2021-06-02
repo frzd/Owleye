@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using System.Collections.Generic;
 
 namespace Owleye.Service.Notifications.Messages
 {
@@ -6,8 +7,8 @@ namespace Owleye.Service.Notifications.Messages
     {
         public int EndPointId { get; set; }
         public string IpAddress { get; set; }
-        public string EmailNotify { get; set; }
-        public string MobileNotify { get; set; }
+        public List<string> EmailNotify { get; set; }
+        public List<string> MobileNotify { get; set; }
         public bool  PingSuccess { get; set; }
     }
 }

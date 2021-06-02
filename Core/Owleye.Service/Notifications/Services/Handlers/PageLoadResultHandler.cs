@@ -49,7 +49,7 @@ namespace Owleye.Service.Notifications.Services
                 {
                     ServiceUrl = notification.PageUrl,
                     SensorType = SensorType.PageLoad,
-                    EmailAddress = notification.EmailNotify,
+                    EmailAddresses = notification.EmailNotify,
                     IsServiceAlive = notification.LoadSuccess
                 }, cancellationToken);
             }

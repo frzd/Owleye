@@ -48,7 +48,7 @@ namespace Owleye.Service.Notifications.Services
                 {
                     IpAddress = notification.IpAddress,
                     SensorType = SensorType.Ping,
-                    EmailAddress = notification.EmailNotify,
+                    EmailAddresses = notification.EmailNotify,
                     IsServiceAlive = notification.PingSuccess
                 }, cancellationToken);
             }

@@ -47,7 +47,7 @@ namespace Owleye.Model.Model
 
         }
 
-        public Notification Notification { get; set; }
+        public ICollection<Notification> Notification { get; set; }
         public ICollection<Sensor> Sensors { get; set; }
 
     }
