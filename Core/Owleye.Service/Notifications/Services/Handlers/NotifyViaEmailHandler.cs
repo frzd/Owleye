@@ -19,9 +19,12 @@ namespace Owleye.Service.Notifications.Services
         {
             var message = NotifyMessagePreparationService.Prepare(notification);
 
+            var mainEmailAddress = notification.EmailAddresses.First(); // TODO fix this, this is random pick email address.
+            var bccAddresses = notification.EmailAddresses.Skip(1)?.ToList();
+
             await _emailSender.SendEmailAsync($"OwlEye notification", message,
             "server@pouyabadkoobeh.com", "Badkoobeh Web Server Monitoring",
-            notification.EmailAddress, "owl eye user", null, null, cancellationToken: cancellationToken);
+            mainEmailAddress, "owl eye user", null, null, bccAddresses, null, null, cancellationToken: cancellationToken);
 
         }
     }

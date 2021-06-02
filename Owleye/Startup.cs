@@ -29,7 +29,7 @@ namespace Owleye
         {
             services.AddControllers();
             services.AddDbContext<OwleyeDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString(nameof(OwleyeDbContext))));
+                options.UseSqlServer(Configuration.GetConnectionString(nameof(OwleyeDbContext))), ServiceLifetime.Transient);
 
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IRedisCache, RedisCache>();
@@ -37,12 +37,12 @@ namespace Owleye
             services.AddLiteXSmtpEmail();
             services.AddStackExchangeRedisCache(options =>
             {
-                options.Configuration = "localhost:6379";
+                options.Configuration = "127.0.0.1:6379";
             });
 
             services.AddTransient<ISensorService, SensorService>();
         }
-        
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider sp, ILoggerFactory loggerFactory)
         {
             //loggerFactory.AddFile("Logs/Owleye-{Date}.log");
