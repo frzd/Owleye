@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using System;
 using System.Collections.Generic;
 
 namespace Owleye.Service.Notifications.Messages
@@ -10,5 +11,6 @@ namespace Owleye.Service.Notifications.Messages
         public List<string> EmailNotify { get; set; }
         public List<string> MobileNotify { get; set; }
         public bool LoadSuccess { get; set; }
+        public DateTime LastAvilable { get; set; }
     }
 }

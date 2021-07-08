@@ -10,7 +10,7 @@ namespace Owleye.Common.Util
             try
             {
                 var request = WebRequest.Create(url) as HttpWebRequest;
-                request.Timeout = 5000; //TODO increase this.
+                request.Timeout = 8000;
                 request.Method = "HEAD";
 
                 if (request.GetResponse() is HttpWebResponse response)
