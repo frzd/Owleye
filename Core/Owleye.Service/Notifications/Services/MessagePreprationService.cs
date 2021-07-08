@@ -55,6 +55,8 @@ namespace Owleye.Service.Notifications.Services
                                 {
                                     stringBuilder.Append(
                                         $"{SensorType.PageLoad.AsString(EnumFormat.Description)} for url {message.ServiceUrl} available." +  "<br/>");
+                                    stringBuilder.Append(
+                                       $"{SensorType.PageLoad.AsString(EnumFormat.Description)} was unavailable for {(DateTime.Now-message.LastAvailable).TotalMinutes} minutes." + "<br/>");
                                     break;
                                 }
                         }
@@ -65,6 +67,12 @@ namespace Owleye.Service.Notifications.Services
 
             stringBuilder.Append("<hr/> <b> Owleye monitoring system. </b>");
             return stringBuilder.ToString();
+        }
+        public static string PrepareMailTitle(string endPointUrl,bool status)
+        {
+            var availStatus = status == true ? "Avilable" : "Down";
+            string title = $"Owleye {endPointUrl} is {availStatus}";
+            return title;
         }
     }
 }

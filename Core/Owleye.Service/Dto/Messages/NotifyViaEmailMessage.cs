@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Owleye.Model.Model;
+using System;
 using System.Collections.Generic;
 
 namespace Owleye.Service.Notifications.Messages
@@ -11,5 +12,6 @@ namespace Owleye.Service.Notifications.Messages
         public SensorType SensorType { get; set; }
         public List<string> EmailAddresses { get; set; }
         public bool IsServiceAlive { get; set; }
+        public DateTime LastAvailable { get; set; }
     }
 }

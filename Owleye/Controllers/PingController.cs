@@ -17,7 +17,7 @@ namespace Owleye.Controllers
         [HttpGet]
         public IActionResult Get(int id)
         {
-            _log.LogInformation("d");
+            _log.LogInformation("Ping is ok");
             return Ok();
         }
     }

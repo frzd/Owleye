@@ -31,14 +31,15 @@ namespace Owleye.Service.Notifications.Services
 
             history = await _cache.GetAsync<MonitoringHistoryDto>(cacheKey) ?? new MonitoringHistoryDto();
 
-            if (history.LastStatus != notification.LoadSuccess)
+            notification.LastAvilable = history.GetLastAvailable();
+
+            if (history.HasHistory() && history.LastStatus != notification.LoadSuccess)
             {
                 await Notify(notification, cancellationToken);
             }
 
             history.AddCheckEvent(DateTime.Now, notification.LoadSuccess);
             await _cache.SetAsync(cacheKey, history);
-
         }
 
         private async Task Notify(PageLoadNotificationMessage notification, CancellationToken cancellationToken)
@@ -50,7 +51,8 @@ namespace Owleye.Service.Notifications.Services
                     ServiceUrl = notification.PageUrl,
                     SensorType = SensorType.PageLoad,
                     EmailAddresses = notification.EmailNotify,
-                    IsServiceAlive = notification.LoadSuccess
+                    IsServiceAlive = notification.LoadSuccess,
+                    LastAvailable = notification.LastAvilable
                 }, cancellationToken);
             }
 
