@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Owleye.Model", "Core\Owleye.Model\Owleye.Model.csproj", "{B898F267-1FF5-4F35-B759-30243FEE6595}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Owleye.Model", "src\Core\Owleye.Model\Owleye.Model.csproj", "{B898F267-1FF5-4F35-B759-30243FEE6595}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Owleye.Service", "Core\Owleye.Service\Owleye.Service.csproj", "{CDB8E48E-9FB9-4804-B921-43B12277FC33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Owleye.Service", "src\Core\Owleye.Service\Owleye.Service.csproj", "{CDB8E48E-9FB9-4804-B921-43B12277FC33}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Owleye.Common", "Core\Owleye.Common\Owleye.Common.csproj", "{65E9E9FC-C9C6-4346-84FB-1D4231047F9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Owleye.Common", "src\Core\Owleye.Common\Owleye.Common.csproj", "{65E9E9FC-C9C6-4346-84FB-1D4231047F9A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Owleye", "Owleye\Owleye.csproj", "{44B00B11-B2E2-446F-B3E7-6DFBFF069469}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Owleye", "src\Owleye\Owleye.csproj", "{44B00B11-B2E2-446F-B3E7-6DFBFF069469}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
