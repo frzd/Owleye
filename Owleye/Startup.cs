@@ -33,6 +33,7 @@ namespace Owleye
 
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IRedisCache, RedisCache>();
+            services.AddTransient<IQrtzSchedule, QrtzSchedule>();
             services.AddMediatR(typeof(DoPingHandler).Assembly);
             services.AddLiteXSmtpEmail();
             services.AddStackExchangeRedisCache(options =>
