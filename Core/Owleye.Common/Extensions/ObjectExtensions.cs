@@ -13,6 +13,7 @@ namespace Owleye.Common.Extensions
 
             var bf = new BinaryFormatter();
             var ms = new MemoryStream();
+            //TODO fix this security vulnerabilities
             bf.Serialize(ms, obj);
             return ms.ToArray();
         }
@@ -23,6 +24,7 @@ namespace Owleye.Common.Extensions
             var binForm = new BinaryFormatter();
             memStream.Write(arrBytes, 0, arrBytes.Length);
             memStream.Seek(0, SeekOrigin.Begin);
+            //TODO fix this security vulnerabilities
             T obj = (T)binForm.Deserialize(memStream);
 
             return obj;
