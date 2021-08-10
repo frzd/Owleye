@@ -5,13 +5,13 @@ namespace Owleye.Common.Util
 {
     public static class WebSiteUtil
     {
-        public static bool IsUrlAlive(string url)
+        public static bool IsUrlAlive(string url,int urlTimeout)
         {
             try
             {
                 var request = WebRequest.Create(url) as HttpWebRequest;
-                request.Timeout = 8000;
-                request.Method = "HEAD";
+                request.Timeout = urlTimeout;
+                request.Method = "HEAD"; // TODO fix this, head maybe disallowed in some situations
 
                 if (request.GetResponse() is HttpWebResponse response)
                 {

@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using LiteX.Email.Core;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Owleye.Service.Notifications.Messages;
 
@@ -12,10 +13,15 @@ namespace Owleye.Service.Notifications.Services
     {
         private readonly ILiteXEmailSender _emailSender;
         private readonly ILogger<NotifyViaEmailHandler> _logger;
-        public NotifyViaEmailHandler(ILiteXEmailSender emailSender, ILogger<NotifyViaEmailHandler> logger)
+        private readonly IConfiguration _configuration;
+
+        public NotifyViaEmailHandler(ILiteXEmailSender emailSender,
+            ILogger<NotifyViaEmailHandler> logger,
+            IConfiguration configuration)
         {
             _emailSender = emailSender;
             _logger = logger;
+            _configuration = configuration;
         }
         public async Task Handle(NotifyViaEmailMessage notification, CancellationToken cancellationToken)
         {
@@ -29,10 +35,14 @@ namespace Owleye.Service.Notifications.Services
                 bccAddresses = null;
 
             var mailTitle = NotifyMessagePreparationService.PrepareMailTitle(notification.ServiceUrl, notification.IsServiceAlive);
-
+            var from = _configuration["MailNotify:FromMail"];
+            var fromName = _configuration["MailNotify:FromName"];
+            var toName = _configuration["MailNotify:ToName"];
+            
             await _emailSender.SendEmailAsync(mailTitle, message,
-            "server@badkoobehschool.com", "Badkoobeh Web Server Monitoring",
-            mainEmailAddress, "owl eye user", bcc: bccAddresses, cancellationToken: cancellationToken);
+            from, fromName,
+            mainEmailAddress,
+            toName, bcc: bccAddresses, cancellationToken: cancellationToken);
 
         }
     }

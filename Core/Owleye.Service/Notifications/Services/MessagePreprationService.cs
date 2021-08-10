@@ -23,14 +23,14 @@ namespace Owleye.Service.Notifications.Services
                             case SensorType.Ping:
                                 {
                                     stringBuilder.Append(
-                                        $"{SensorType.Ping.AsString(EnumFormat.Description)} for IP {message.IpAddress} failed." +  "<br/>");
+                                        $"{SensorType.Ping.AsString(EnumFormat.Description)} for IP {message.IpAddress} failed." + "<br/>");
                                     break;
                                 }
 
                             case SensorType.PageLoad:
                                 {
                                     stringBuilder.Append(
-                                        $"{SensorType.PageLoad.AsString(EnumFormat.Description)} for url {message.ServiceUrl} failed." +  "<br/>");
+                                        $"{SensorType.PageLoad.AsString(EnumFormat.Description)} for url {message.ServiceUrl} failed." + "<br/>");
                                     break;
                                 }
                         }
@@ -40,23 +40,23 @@ namespace Owleye.Service.Notifications.Services
 
                 case true:
                     {
-                        stringBuilder.Append("<b> Owleye Service Notification </b>" +  "<br/>");
+                        stringBuilder.Append("<b> Owleye Service Notification </b>" + "<br/>");
 
                         switch (message.SensorType)
                         {
                             case SensorType.Ping:
                                 {
                                     stringBuilder.Append(
-                                        $"{SensorType.Ping.AsString(EnumFormat.Description)} for IP {message.IpAddress} available." +  "<br/>");
+                                        $"{SensorType.Ping.AsString(EnumFormat.Description)} for IP {message.IpAddress} available." + "<br/>");
                                     break;
                                 }
 
                             case SensorType.PageLoad:
                                 {
                                     stringBuilder.Append(
-                                        $"{SensorType.PageLoad.AsString(EnumFormat.Description)} for url {message.ServiceUrl} available." +  "<br/>");
+                                        $"{SensorType.PageLoad.AsString(EnumFormat.Description)} for url {message.ServiceUrl} available." + "<br/>");
                                     stringBuilder.Append(
-                                       $"{SensorType.PageLoad.AsString(EnumFormat.Description)} was unavailable for {Convert.ToInt32((DateTime.Now-message.LastAvailable).TotalMinutes.ToString())} minutes." + "<br/>");
+                                       $"{SensorType.PageLoad.AsString(EnumFormat.Description)} was unavailable for {Convert.ToInt32((DateTime.Now - message.LastAvailable).TotalMinutes.ToString())} minutes." + "<br/>");
                                     break;
                                 }
                         }
@@ -68,11 +68,10 @@ namespace Owleye.Service.Notifications.Services
             stringBuilder.Append("<hr/> <b> Owleye monitoring system. </b>");
             return stringBuilder.ToString();
         }
-        public static string PrepareMailTitle(string endPointUrl,bool status)
+        public static string PrepareMailTitle(string endPointUrl, bool status)
         {
             var availStatus = status == true ? "Avilable" : "Down";
-            string title = $"Owleye {endPointUrl} is {availStatus}";
-            return title;
+            return $"Owleye {endPointUrl} is {availStatus}";
         }
     }
 }

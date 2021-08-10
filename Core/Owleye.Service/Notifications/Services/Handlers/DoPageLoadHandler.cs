@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Owleye.Common.Cache;
 using Owleye.Common.Util;
 using Owleye.Model.Model;
@@ -15,18 +16,24 @@ namespace Owleye.Service.Notifications.Services
     {
         private readonly IMediator _mediator;
         private readonly IRedisCache _cache;
+        private readonly IConfiguration _configuration;
 
         public DoPageLoadHandler(
             IMediator mediator,
-            IRedisCache cache)
+            IRedisCache cache,
+            IConfiguration configuration)
         {
             _mediator = mediator;
             _cache = cache;
+            _configuration = configuration;
         }
+
+
         public async Task Handle(DoPageLoadMessage notification, CancellationToken cancellationToken)
         {
             var cacheKey = $"{notification.EndPointId}-{nameof(SensorType.PageLoad)}";
             var operation = await _cache.GetAsync<OngoingOperationDto>(cacheKey);
+
 
             if (operation != null)
             {
@@ -40,10 +47,14 @@ namespace Owleye.Service.Notifications.Services
 
             var networkavailability = true;
 
-            var urlResult = WebSiteUtil.IsUrlAlive(notification.PageUrl);
+            var urlLoadTimeout = int.Parse(_configuration["General:UrlLoadTimeout"]);
+            var urlResult = WebSiteUtil.IsUrlAlive(notification.PageUrl, urlLoadTimeout);
 
             if (urlResult == false) // check network availability
-                networkavailability = PingUtil.Ping("8.8.8.8");
+            {
+                var pingAddress = _configuration["General:PingAddress"];
+                networkavailability = PingUtil.Ping(pingAddress);
+            }
 
             if (networkavailability == false)
             {

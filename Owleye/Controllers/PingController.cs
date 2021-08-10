@@ -18,7 +18,7 @@ namespace Owleye.Controllers
         public IActionResult Get(int id)
         {
             _log.LogInformation("Ping is ok");
-            return Ok();
+            return Ok("Ping is ok");
         }
     }
 }
