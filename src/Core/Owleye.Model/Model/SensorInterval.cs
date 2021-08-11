@@ -1,4 +1,4 @@
-﻿namespace Owleye.Model.Model
+﻿namespace Owleye.Shared.Data
 {
     public enum SensorInterval
     {

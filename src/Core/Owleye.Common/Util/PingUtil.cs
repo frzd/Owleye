@@ -1,6 +1,6 @@
 ﻿using System.Net.NetworkInformation;
 
-namespace Owleye.Common.Util
+namespace Owleye.Shared.Util
 {
     public static class PingUtil
     {

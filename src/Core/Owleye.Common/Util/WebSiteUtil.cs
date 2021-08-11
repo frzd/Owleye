@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Owleye.Common.Util
+namespace Owleye.Shared.Util
 {
     public static class WebSiteUtil
     {

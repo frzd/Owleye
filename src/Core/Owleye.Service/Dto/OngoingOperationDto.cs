@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Owleye.Service.Dto
+namespace Owleye.Core.Dto
 {
     [Serializable]
     public class OngoingOperationDto

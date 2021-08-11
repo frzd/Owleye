@@ -23,9 +23,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\Owleye.Common\Owleye.Common.csproj" />
-    <ProjectReference Include="..\Core\Owleye.Model\Owleye.Model.csproj" />
-    <ProjectReference Include="..\Core\Owleye.Service\Owleye.Service.csproj" />
+    <ProjectReference Include="..\Owleye.Infrastructure\Owleye.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logs\" />
   </ItemGroup>
 
 </Project>

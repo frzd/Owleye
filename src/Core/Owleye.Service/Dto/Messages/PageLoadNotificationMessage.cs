@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Owleye.Service.Notifications.Messages
+namespace Owleye.Core.Notifications.Messages
 {
     public class PageLoadNotificationMessage : INotification
     {

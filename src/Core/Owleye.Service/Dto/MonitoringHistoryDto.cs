@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Owleye.Service.Dto
+namespace Owleye.Core.Dto
 {
     [Serializable]
     public class MonitoringHistoryDto

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Owleye.Model.Model
+namespace Owleye.Shared.Data
 {
     [Serializable]
     public class Sensor: BaseEntity

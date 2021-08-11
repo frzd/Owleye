@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Dawn;
 using Extension.Methods;
 
-namespace Owleye.Model.Model
+namespace Owleye.Shared.Data
 {
     [Serializable]
     public class EndPoint : BaseEntity

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Owleye.Model.Model
+namespace Owleye.Shared.Data
 {
     public enum SensorType
     {

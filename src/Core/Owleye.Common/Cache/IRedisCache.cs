@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Owleye.Common.Cache
+namespace Owleye.Shared.Cache
 {
     public interface IRedisCache
     {

@@ -1,10 +1,8 @@
 ﻿using MediatR;
 using System.Collections.Generic;
 
-namespace Owleye.Service.Dto.Messages
+namespace Owleye.Core.Dto.Messages
 {
-   
-
     public class DoPingMessage : INotification
     {
         public int EndPointId { get; set; }

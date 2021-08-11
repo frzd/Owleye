@@ -8,12 +8,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Owleye.Common.Cache;
-using Owleye.Model.Model;
-using Owleye.Model.Repository;
-using Owleye.Service;
-using Owleye.Service.Bl;
-using Owleye.Service.Notifications.Services;
+using Owleye.Shared.Cache;
+using Owleye.Shared.Data;
+using Owleye.Core;
+using Owleye.Infrastructure.Cache;
+using Owleye.Core.Handlers;
+using Owleye.Infrastructure.Quartz;
+using Owleye.Core.Services;
+using Owleye.Infrastructure.Data;
+using Owleye.Infrastructure.Service;
 
 namespace Owleye
 {
@@ -38,7 +41,7 @@ namespace Owleye
             services.AddLiteXSmtpEmail();
             services.AddStackExchangeRedisCache(options =>
             {
-                options.Configuration = "127.0.0.1:6379";
+                options.Configuration = Configuration["General:RedisAddress"];
             });
 
             services.AddTransient<ISensorService, SensorService>();
@@ -69,19 +72,9 @@ namespace Owleye
 
             new QuartzBootStrap().Boot();
         }
+
+
+        
     }
 
-    /// <summary>
-    ///  temporary usage of this pattern 
-    /// </summary>
-    public static class ServiceLocator
-    {
-        private static IServiceProvider _provider;
-        public static void Init(IServiceProvider provider)
-        {
-            _provider = provider;
-        }
-
-        public static T Resolve<T>() => (T)_provider.GetService(typeof(T));
-    }
 }

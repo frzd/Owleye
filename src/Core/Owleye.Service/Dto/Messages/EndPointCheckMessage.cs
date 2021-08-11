@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using Owleye.Model.Model;
+using Owleye.Core.Aggrigate;
 using System.Collections.Generic;
 
-namespace Owleye.Service.Dto.Messages
+namespace Owleye.Core.Dto.Messages
 {
     public class EndPointCheckMessage : INotification
     {
