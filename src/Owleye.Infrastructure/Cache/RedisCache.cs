@@ -1,32 +1,46 @@
-﻿using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Distributed;
-using Owleye.Infrastructure.Extensions;
+﻿using System;
+using System.Threading.Tasks;
+using EasyCaching.Core;
+using Microsoft.Extensions.Configuration;
 using Owleye.Shared.Cache;
 
 namespace Owleye.Infrastructure.Cache
 {
     public class RedisCache : IRedisCache
     {
-        private readonly IDistributedCache _distributedCache;
+        private readonly IEasyCachingProviderFactory _distributedCache;
+        private readonly IConfiguration _configuration;
 
-        public RedisCache(IDistributedCache distributedCache)
+        public RedisCache(
+            IEasyCachingProviderFactory distributedCache,
+            IConfiguration configuration)
         {
             _distributedCache = distributedCache;
+            _configuration = configuration;
         }
         public async Task SetAsync<T>(string key, T objectToCache)
         {
-            await _distributedCache.SetAsync(key, objectToCache.ObjectToByteArray());
+            // TODO refactor this.
+            var provider = _distributedCache.GetCachingProvider(_configuration["General:RedisInstanceName"]);
+
+            await provider.SetAsync(key, objectToCache, TimeSpan.FromDays(90));
+
         }
 
         public async Task Remove(string key)
         {
-            await _distributedCache.RemoveAsync(key);
+            throw new NotImplementedException();
         }
 
         public async Task<T> GetAsync<T>(string key)
         {
-            var obj = await _distributedCache.GetAsync(key);
-            return obj == null ? default(T) : obj.ByteArrayToObject<T>();
+
+            // TODO refactor this.
+            var provider = _distributedCache.GetCachingProvider(_configuration["General:RedisInstanceName"]);
+
+            var cachedResult = await provider.GetAsync<T>(key);
+            return cachedResult.Value;
+
         }
     }
 }
