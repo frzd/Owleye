@@ -19,6 +19,9 @@ using Owleye.Infrastructure.Data;
 using Owleye.Infrastructure.Service;
 using EasyCaching.Core.Configurations;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Owleye
 {
@@ -53,8 +56,24 @@ namespace Owleye
                 .UseRedisLock(); //with distributed lock, prevent problem in aysnc.
             });
 
-            
-            services.AddSwaggerGen(c => {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.SaveToken = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        ValidAudience = Configuration["Jwt:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                    };
+                });
+
+            services.AddSwaggerGen(c =>
+            {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Owleye API", Version = "v1" });
                 c.EnableAnnotations();
             });
@@ -83,7 +102,7 @@ namespace Owleye
                 endpoints.MapControllers();
             });
 
-           
+
             //TODO : ANTI Pattern, Refactor THIS
             var serviceScope = app.ApplicationServices.
                 GetRequiredService<IServiceScopeFactory>().CreateScope();
