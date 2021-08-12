@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Owleye.Controllers
 {
@@ -7,18 +7,17 @@ namespace Owleye.Controllers
     [Route("[controller]")]
     public class PingController : ControllerBase
     {
-        private readonly ILogger _log;
-
-        public PingController(ILogger<PingController> logger)
-        {
-            _log = logger;
-        }
 
         [HttpGet]
-        public IActionResult Get(int id)
+        [SwaggerOperation(
+            Summary = "Ping endpoint for availability status ",
+            Description = "api availability check",
+            OperationId = "Ping.Get",
+            Tags = new[] { "HealthCheckEndpoints" })
+        ]
+        public IActionResult Get()
         {
-            _log.LogInformation("Ping is ok");
-            return Ok("Ping is ok");
+            return Ok(":)");
         }
     }
 }

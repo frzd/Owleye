@@ -18,6 +18,7 @@ using Owleye.Core.Services;
 using Owleye.Infrastructure.Data;
 using Owleye.Infrastructure.Service;
 using EasyCaching.Core.Configurations;
+using Microsoft.OpenApi.Models;
 
 namespace Owleye
 {
@@ -52,6 +53,11 @@ namespace Owleye
                 .UseRedisLock(); //with distributed lock, prevent problem in aysnc.
             });
 
+            
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Owleye API", Version = "v1" });
+                c.EnableAnnotations();
+            });
 
             services.AddTransient<ISensorService, SensorService>();
         }
@@ -63,6 +69,9 @@ namespace Owleye
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Owleye API V1"));
             }
 
             app.UseRouting();
@@ -74,6 +83,7 @@ namespace Owleye
                 endpoints.MapControllers();
             });
 
+           
             //TODO : ANTI Pattern, Refactor THIS
             var serviceScope = app.ApplicationServices.
                 GetRequiredService<IServiceScopeFactory>().CreateScope();
