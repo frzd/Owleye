@@ -17,6 +17,7 @@ using Owleye.Infrastructure.Quartz;
 using Owleye.Core.Services;
 using Owleye.Infrastructure.Data;
 using Owleye.Infrastructure.Service;
+using EasyCaching.Core.Configurations;
 
 namespace Owleye
 {
@@ -39,10 +40,18 @@ namespace Owleye
             services.AddTransient<IQrtzSchedule, QrtzSchedule>();
             services.AddMediatR(typeof(DoPingHandler).Assembly);
             services.AddLiteXSmtpEmail();
-            services.AddStackExchangeRedisCache(options =>
+            services.AddEasyCaching(options =>
             {
-                options.Configuration = Configuration["General:RedisAddress"];
+                options.UseRedis(config =>
+                {
+                    config.DBConfig.Endpoints.Add(new
+                        ServerEndPoint(Configuration["General:RedisAddress"],
+                        int.Parse(Configuration["General:RedisPort"])));
+                }, Configuration["General:RedisInstanceName"]) //redis provider name
+                .WithMessagePack()
+                .UseRedisLock(); //with distributed lock, prevent problem in aysnc.
             });
+
 
             services.AddTransient<ISensorService, SensorService>();
         }
@@ -74,7 +83,7 @@ namespace Owleye
         }
 
 
-        
+
     }
 
 }
