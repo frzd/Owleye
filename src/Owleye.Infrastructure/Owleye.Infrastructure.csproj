@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Extensions\**" />
+    <EmbeddedResource Remove="Extensions\**" />
+    <None Remove="Extensions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EasyCaching.Core" Version="1.4.0" />
     <PackageReference Include="Quartz" Version="3.0.7" />
     <PackageReference Include="MediatR" Version="8.0.2" />
@@ -19,10 +25,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Owleye.Service\Owleye.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Extensions\" />
   </ItemGroup>
 
 </Project>

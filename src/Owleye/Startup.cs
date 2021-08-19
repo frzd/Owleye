@@ -22,6 +22,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Owleye
 {
@@ -78,6 +79,7 @@ namespace Owleye
                 c.EnableAnnotations();
             });
 
+           
             services.AddTransient<ISensorService, SensorService>();
         }
 
@@ -94,6 +96,13 @@ namespace Owleye
             }
 
             app.UseRouting();
+
+            app.UseCors(x => x
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .SetIsOriginAllowed(origin => true) // allow any origin
+               .AllowCredentials());
+
 
             app.UseAuthorization();
 
@@ -112,7 +121,7 @@ namespace Owleye
         }
 
 
-
+        
     }
 
 }
