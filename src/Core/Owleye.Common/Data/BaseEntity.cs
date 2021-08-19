@@ -2,12 +2,11 @@
 
 namespace Owleye.Shared.Data
 {
-    [Serializable]
-    public class BaseEntity
+    public class BaseEntity : IBaseEntity
     {
-        public int Id { get;}
+        public int Id { get; }
 
-        public DateTimeOffset Created  { get; protected set; }
+        public DateTimeOffset Created { get; protected set; }
         public DateTimeOffset? Modified { get; protected set; }
 
         public int CreatedById { get; protected set; }

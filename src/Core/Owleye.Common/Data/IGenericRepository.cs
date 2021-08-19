@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Owleye.Shared.Data
 {
-    public interface IGenericRepository<TEntity> where TEntity : BaseEntity
+    public interface IGenericRepository<TEntity> where TEntity : IBaseEntity
     {
 
         Task<IEnumerable<TEntity>> GetAsync(

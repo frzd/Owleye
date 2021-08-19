@@ -16,13 +16,13 @@ namespace Owleye.Core.Services
         {
             _sensorRepository = sensorRepository;
         }
+
         public async Task<IEnumerable<Sensor>> GetSensors(SensorInterval interval, SensorType sensorType)
         {
-            var endPointList = (await GetSensors(interval)).Where(q => q.SensorType == sensorType);
-            return endPointList;
+            return (await GetSensorsByInterval(interval)).Where(q => q.SensorType == sensorType);
         }
 
-        public async Task<IEnumerable<Sensor>> GetSensors(SensorInterval interval)
+        public async Task<IEnumerable<Sensor>> GetSensorsByInterval(SensorInterval interval)
         {
             var includeProperties = new Expression<Func<Sensor, dynamic>>[2];
             includeProperties[0] = i => i.EndPoint;

@@ -117,7 +117,7 @@ namespace Owleye
                 GetRequiredService<IServiceScopeFactory>().CreateScope();
             ServiceLocator.Init(serviceScope.ServiceProvider);
 
-            new QuartzBootStrap().Boot();
+            QuartzBootStrap.Boot();
         }
 
 

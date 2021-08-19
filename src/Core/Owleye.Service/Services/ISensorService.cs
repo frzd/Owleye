@@ -7,6 +7,6 @@ namespace Owleye.Core.Services
     public interface ISensorService
     {
         Task<IEnumerable<Sensor>> GetSensors(SensorInterval interval, SensorType sensorType);
-        Task<IEnumerable<Sensor>> GetSensors(SensorInterval interval);
+        Task<IEnumerable<Sensor>> GetSensorsByInterval(SensorInterval interval);
     }
 }
