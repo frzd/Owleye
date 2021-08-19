@@ -1,4 +1,4 @@
-﻿namespace Owleye.Controllers
+﻿namespace Owleye.Controllers.v1
 {
     public class UserModel
     {

@@ -22,7 +22,9 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace Owleye
 {
@@ -36,7 +38,7 @@ namespace Owleye
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+
             services.AddDbContext<OwleyeDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(nameof(OwleyeDbContext))), ServiceLifetime.Transient);
 
@@ -57,6 +59,36 @@ namespace Owleye
                 .UseRedisLock(); //with distributed lock, prevent problem in aysnc.
             });
 
+            services.AddControllers();
+
+            services.AddApiVersioning(
+               options =>
+               {
+                   options.ReportApiVersions = true;
+                   options.DefaultApiVersion = new ApiVersion(1, 0);
+                   options.AssumeDefaultVersionWhenUnspecified = true;
+               });
+
+            services.AddVersionedApiExplorer(
+                options =>
+                {
+                    options.GroupNameFormat = "'v'VVV";
+                    options.SubstituteApiVersionInUrl = true;
+                });
+
+
+            services.AddSwaggerGen(options =>
+            {
+                options.CustomSchemaIds(x => x.FullName);
+                options.DescribeAllParametersInCamelCase();
+                options.ResolveConflictingActions(o => o.FirstOrDefault());
+
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "api.swagger.Versioning", Version = "v1" });
+                options.SwaggerDoc("v2", new OpenApiInfo { Title = "api.swagger.Versioning", Version = "v2" });
+            });
+
+
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -73,17 +105,10 @@ namespace Owleye
                     };
                 });
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Owleye API", Version = "v1" });
-                c.EnableAnnotations();
-            });
-
-           
             services.AddTransient<ISensorService, SensorService>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider sp, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider sp, ILoggerFactory loggerFactory, IApiVersionDescriptionProvider provider)
         {
             //loggerFactory.AddFile("Logs/Owleye-{Date}.log");
 
@@ -91,9 +116,20 @@ namespace Owleye
             {
                 app.UseDeveloperExceptionPage();
 
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Owleye API V1"));
+
             }
+
+            app.UseSwagger().UseSwaggerUI(c =>
+            {
+                c.DisplayRequestDuration();
+
+                foreach (var desc in provider.ApiVersionDescriptions)
+                {
+                    c.SwaggerEndpoint($"/swagger/{desc.GroupName}/swagger.json",
+                        "owleye " + desc.GroupName.ToUpper());
+                }
+            });
+
 
             app.UseRouting();
 
@@ -120,8 +156,6 @@ namespace Owleye
             QuartzBootStrap.Boot();
         }
 
-
-        
     }
 
 }

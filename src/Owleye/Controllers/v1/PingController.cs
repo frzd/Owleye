@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Owleye.Controllers
+namespace Owleye.Controllers.v1
 {
     [ApiController]
-    [Route("[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class PingController : ControllerBase
     {
 
@@ -18,7 +18,7 @@ namespace Owleye.Controllers
         ]
         public IActionResult Get()
         {
-            return Ok(":)");
+            return Ok("v1 :)");
         }
     }
 }
