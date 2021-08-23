@@ -22,6 +22,10 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using GlobalExceptionHandler.WebApi;
+using GlobalExceptionHandler;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace Owleye
 {
@@ -87,16 +91,37 @@ namespace Owleye
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-
+                //TODO add development data.
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Owleye API V1"));
             }
+            else
+            {
+
+                app.UseGlobalExceptionHandler(x =>
+                {
+                    x.ContentType = "application/json";
+                    x.ResponseBody((s) => JsonConvert.SerializeObject(
+                        new ExcepionResponseModel
+                        {
+                            Message = s.Message,
+                        }));
+                    x.OnException((c, logger) =>
+                    {
+                        logger.LogError("error in app," + c.Exception.Message);
+                        return Task.CompletedTask;
+                    });
+
+                    x.Map<AppException>()
+                    .ToStatusCode(x => x.ApiStatusCode)
+                    .WithBody((ex, context) =>
+                    JsonConvert.SerializeObject(new ExcepionResponseModel { Message = ex.Message, Code = ex.Code }));
+                }, loggerFactory);
+
+            }
 
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
