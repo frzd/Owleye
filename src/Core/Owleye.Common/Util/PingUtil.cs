@@ -2,6 +2,7 @@
 
 namespace Owleye.Shared.Util
 {
+
     public static class PingUtil
     {
         public static bool Ping(string ip)
