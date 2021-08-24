@@ -25,8 +25,6 @@ namespace Owleye.Controllers
         [HttpPost("Login")]
         public IActionResult Login([FromBody] UserModel login)
         {
-           
-
             var user = AuthenticateUser(login);
 
             if (user != null)

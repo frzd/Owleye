@@ -18,6 +18,10 @@ namespace Owleye.Controllers
         ]
         public IActionResult Get()
         {
+            var model = new UserModel();
+            model.EmailAddress = "sssssssssssssssssssssssssssss";
+            model.Validate(model);
+
             return Ok(":)");
         }
     }
